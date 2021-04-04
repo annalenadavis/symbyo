@@ -1,0 +1,9 @@
+{% if trainers_list %}
+    <ul>
+    {% for trainer in trainers_list %}
+        <li><a href="/trainers/{{ trainer.id }}/">{{ trainer.first_name }} {{ trainer.last_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No trainers are available.</p>
+{% endif %}

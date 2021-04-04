@@ -1,0 +1,6 @@
+{% if trainer_id %}
+        <p>This is the profile for:</p>
+        <p>{{ trainer.first_name }} {{ trainer.last_name }}</p>
+{% else %}
+    <p>There is no trainer with this id</p>
+{% endif %}
