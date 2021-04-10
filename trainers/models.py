@@ -30,5 +30,5 @@ class Trainer(Profile):
     disciplines = models.ManyToManyField('Discipline', blank=True)
 
 class Review(models.Model):
-    # trainer = models.ForeignKey('Trainer', on_delete=models.CASCADE)
-    reviewer = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    trainer = models.ForeignKey('Trainer', on_delete=models.CASCADE, null=True)
+    # reviewer = models.ForeignKey('Profile', on_delete=models.CASCADE)
