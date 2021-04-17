@@ -1,21 +1,26 @@
 from django.http import HttpResponse
 from django.template import loader
+from django.contrib.auth.models import User
 
 from .models import Trainer
 
 # See all Trainers
 def index(request):
+    users_list = User.objects.all()
     trainers_list = Trainer.objects.all()
     template = loader.get_template('reviews/index.html')
     context = {
+        'users_list': users_list,
         'trainers_list': trainers_list,
     }
     return HttpResponse(template.render(context, request))
 
 # Trainer Profile
-def trainer(request, trainer_id):
+def trainer(request, user_id):
     template = loader.get_template('reviews/trainer.html')
+    object_id = user_id - 1
     context = {
-        'trainer_id' : trainer_id,
+        'user_id' : user_id,
+        'user' : User.objects.all()[object_id],
     }
     return HttpResponse(template.render(context, request))

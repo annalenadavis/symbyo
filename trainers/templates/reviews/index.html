@@ -1,7 +1,7 @@
-{% if trainers_list %}
+{% if users_list %}
     <ul>
-    {% for trainer in trainers_list %}
-        <li><a href="/trainers/{{ trainer.id }}/">{{ trainer.first_name }} {{ trainer.last_name }}</a></li>
+    {% for user in users_list %}
+        <li><a href="/trainers/{{ user.id }}/">{{ user.first_name }} {{ user.last_name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
