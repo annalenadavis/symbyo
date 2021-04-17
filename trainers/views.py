@@ -19,8 +19,10 @@ def index(request):
 def trainer(request, user_id):
     template = loader.get_template('reviews/trainer.html')
     object_id = user_id - 1
+    user = User.objects.all()[object_id]
     context = {
         'user_id' : user_id,
-        'user' : User.objects.all()[object_id],
+        'user' : user,
+        'disc_list' : user.trainer.disciplines.all(),
     }
     return HttpResponse(template.render(context, request))

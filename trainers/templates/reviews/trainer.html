@@ -1,6 +1,16 @@
 {% if user_id %}
         <p>This is the profile for:</p>
         <p>{{ user.first_name }} {{ user.last_name }}</p>
+        <p>{{user.trainer.business}}</p>
+        <p>{{user.trainer.description}}</p>
+        <a href="{{user.trainer.website}}">{{user.trainer.website}}</a>
+        {% if disc_list %}
+            <ul>
+                {% for disc in disc_list %}
+                    <li>{{disc}}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
 {% else %}
     <p>There is no trainer with this id</p>
 {% endif %}
