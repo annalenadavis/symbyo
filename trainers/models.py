@@ -17,11 +17,17 @@ class Trainer(models.Model):
     business = models.CharField(max_length=100, blank=True)
     disciplines = models.ManyToManyField('Discipline', blank=True)
 
-    # def clean(self):
-    #     # Code here - runs before parent clean
-    #     return_value = super().clean()
-    #     # Code here - then run this after running parent
-    #     return return_value
+    @property
+    def name(self):
+        return self.user.first_name + " " + self.user.last_name
+
+    def __str__(self):
+        return self.name
+
+    # @staticmethod
+    # def create_trainer(sender, instance, created, **kwargs):
+    #     if created:
+    #         Trainer.objects.create(user=instance)
 
 @receiver(post_save, sender=User)
 def create_user_trainer(sender, instance, created, **kwargs):
