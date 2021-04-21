@@ -2,11 +2,11 @@ from django import forms
 
 
 class TrainerForm(forms.Form):
-    description = forms.CharField(max_length=200, required=False)
+    description = forms.CharField(max_length=200, required=False, label='Description of what you teach')
     website = forms.URLField(required=False)
-    business = forms.CharField(max_length=100, required=False)
-    created_on = forms.DateTimeField()
-    last_logged_in = forms.DateTimeField()
+    business = forms.CharField(max_length=100, required=False, label='Business Name (Optional)')
+    created_on = forms.DateTimeField(widget=forms.HiddenInput())
+    last_logged_in = forms.DateTimeField(widget=forms.HiddenInput())
 
     def save(self):
         new_trainer = Trainer.objects.create(

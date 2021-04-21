@@ -8,4 +8,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     # ex: /trainers/5/
     path('<int:user_id>/', views.trainer, name='trainer'),
+    path('register', views.register, name='register'),
 ]

@@ -1,8 +1,10 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.contrib.auth.models import User
+from django.shortcuts import render
 
 from .models import Trainer
+from .forms import TrainerForm
 
 # See all Trainers
 def index(request):
@@ -25,3 +27,14 @@ def trainer(request, user_id):
         'disc_list' : user.trainer.disciplines.all(),
     }
     return HttpResponse(template.render(context, request))
+
+# Register Trainer Form
+def register(request):
+    if request.method == 'POST':
+        form = TrainerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/thanks/')
+    else:
+        form = TrainerForm()
+    return render(request, 'trainerform.html', {'form':form})
