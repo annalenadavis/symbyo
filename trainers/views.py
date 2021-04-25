@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render
 
 from .models import Trainer
-from .forms import TrainerForm
+from .forms import TrainerForm, UserForm
 
 # See all Trainers
 def index(request):
@@ -31,10 +31,16 @@ def trainer(request, user_id):
 # Register Trainer Form
 def register(request):
     if request.method == 'POST':
-        form = TrainerForm(request.POST)
-        if form.is_valid():
-            form.save()
+        user_form = UserForm(request.POST, instance=request.user)
+        trainer_form = TrainerForm(request.POST, instance=request.user.trainer)
+        if user_form.is_valid() and trainer_form.is_valid():
+            user_form.save()
+            trainer_form.save()
             return HttpResponseRedirect('/thanks/')
     else:
-        form = TrainerForm()
-    return render(request, 'trainerform.html', {'form':form})
+        user_form = UserForm(instance=request.user)
+        trainer_form = TrainerForm(instance=request.user.trainer)
+    return render(request, 'trainerform.html', {
+        'user_form': user_form,
+        'trainer_form': trainer_form
+    })
