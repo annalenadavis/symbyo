@@ -24,19 +24,5 @@ class Trainer(models.Model):
     def __str__(self):
         return self.name
 
-    # @staticmethod
-    # def create_trainer(sender, instance, created, **kwargs):
-    #     if created:
-    #         Trainer.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def create_user_trainer(sender, instance, created, **kwargs):
-    if created:
-        Trainer.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_user_trainer(sender, instance, **kwargs):
-    instance.trainer.save()
-
 class Review(models.Model):
     trainer = models.ForeignKey('Trainer', on_delete=models.CASCADE, null=True)

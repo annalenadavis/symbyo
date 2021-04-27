@@ -38,8 +38,8 @@ def register(request):
             trainer_form.save()
             return HttpResponseRedirect('/thanks/')
     else:
-        user_form = UserForm(instance=request.user)
-        trainer_form = TrainerForm(instance=request.user.trainer)
+        user_form = UserForm()
+        trainer_form = TrainerForm()
     return render(request, 'trainerform.html', {
         'user_form': user_form,
         'trainer_form': trainer_form

@@ -8,6 +8,8 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'first_name', 'last_name', 'email')
 
 class TrainerForm(forms.ModelForm):
+    # user_id = forms.IntegerField(widget=forms.HiddenInput())
     class Meta:
         model = Trainer
-        fields = ('description', 'website', 'business', 'disciplines')
+        fields = ('description', 'website', 'business', 'disciplines', 'user_id')
+        # hidden field that links trainer with user_id -  grab the current user's id
