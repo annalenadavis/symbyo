@@ -3,7 +3,7 @@ from django.template import loader
 from django.contrib.auth.models import User
 from django.shortcuts import render
 
-from .models import Trainer
+from .models import Trainer, Review
 from .forms import TrainerForm, UserForm
 
 # See all Trainers
@@ -36,7 +36,7 @@ def register(request):
         if user_form.is_valid() and trainer_form.is_valid():
             user_form.save()
             trainer_form.save()
-            return HttpResponseRedirect('/thanks/')
+            return HttpResponseRedirect('/thanks/') # todo: make this page
     else:
         user_form = UserForm()
         trainer_form = TrainerForm()
@@ -44,3 +44,12 @@ def register(request):
         'user_form': user_form,
         'trainer_form': trainer_form
     })
+
+# See all Reviews
+def reviews(request):
+    review_list = Review.objects.all()
+    template = loader.get_template('reviews/reviews.html')
+    context = {
+        'review_list': review_list,
+    }
+    return HttpResponse(template.render(context, request))

@@ -1,0 +1,10 @@
+{% if review_list %}
+    <h2>Read the Reviews</h2>
+    <ul>
+    {% for review in review_list %}
+        <li>{{ review.rating }}, {{ review.review }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No reviews are available.</p>
+{% endif %}

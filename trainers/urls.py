@@ -9,4 +9,5 @@ urlpatterns = [
     # ex: /trainers/5/
     path('<int:user_id>/', views.trainer, name='trainer'),
     path('register', views.register, name='register'),
+    path('reviews', views.reviews, name='reviews'),
 ]
