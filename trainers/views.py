@@ -10,7 +10,7 @@ from .forms import TrainerForm, UserForm
 def index(request):
     users_list = User.objects.all()
     trainers_list = Trainer.objects.all()
-    template = loader.get_template('reviews/index.html')
+    template = loader.get_template('trainers/index.html')
     context = {
         'users_list': users_list,
         'trainers_list': trainers_list,
@@ -19,7 +19,7 @@ def index(request):
 
 # Trainer Profile
 def trainer(request, user_id):
-    template = loader.get_template('reviews/trainer.html')
+    template = loader.get_template('trainers/trainer.html')
     user = User.objects.get(id=user_id)
     context = {
         'user_id' : user_id,
@@ -40,7 +40,7 @@ def register(request):
     else:
         user_form = UserForm()
         trainer_form = TrainerForm()
-    return render(request, 'trainerform.html', {
+    return render(request, 'trainers/trainerform.html', {
         'user_form': user_form,
         'trainer_form': trainer_form
     })
@@ -48,7 +48,7 @@ def register(request):
 # See all Reviews
 def reviews(request):
     review_list = Review.objects.all()
-    template = loader.get_template('reviews/reviews.html')
+    template = loader.get_template('trainers/reviews.html')
     context = {
         'review_list': review_list,
     }
