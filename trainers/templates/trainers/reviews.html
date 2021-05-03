@@ -2,9 +2,14 @@
     <h2>Read the Reviews</h2>
     <ul>
     {% for review in review_list %}
-        <li>{{ review.rating }}, {{ review.review }}</li>
+        <li style="margin:20px;">{{ review.trainer }}, {{ review.rating }}, {{ review.review }}</li>
     {% endfor %}
     </ul>
+    <form action="{% url 'reviews' %}" method="post">
+        {% csrf_token %}
+        {{ review_form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
 {% else %}
     <p>No reviews are available.</p>
 {% endif %}

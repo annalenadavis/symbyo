@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import User, Trainer
+from .models import User, Trainer, Review
 
 class UserForm(forms.ModelForm):
     class Meta:
@@ -13,3 +13,8 @@ class TrainerForm(forms.ModelForm):
         model = Trainer
         fields = ('description', 'website', 'business', 'disciplines')
         # hidden field that links trainer with user_id -  grab the current user's id
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ('trainer', 'review', 'rating')

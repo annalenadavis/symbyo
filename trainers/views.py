@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render
 
 from .models import Trainer, Review
-from .forms import TrainerForm, UserForm
+from .forms import TrainerForm, UserForm, ReviewForm
 
 # See all Trainers
 def index(request):
@@ -48,8 +48,29 @@ def register(request):
 # See all Reviews
 def reviews(request):
     review_list = Review.objects.all()
+    if request.method == 'POST':
+        review_form = ReviewForm(request.POST, instance=request.user)
+        if review_form.is_valid():
+            review_form.save()
+            return HttpResponseRedirect('/trainers/reviews')
+    else:
+        review_form = ReviewForm()
     template = loader.get_template('trainers/reviews.html')
     context = {
         'review_list': review_list,
+        'review_form': review_form,
     }
     return HttpResponse(template.render(context, request))
+
+# Review Form
+def reviewform(request):
+    if request.method == 'POST':
+        review_form = ReviewForm(request.POST, instance=request.user)
+        if review_form.is_valid():
+            review_form.save()
+        return HttpResponseRedirect('/trainers/reviewform') # todo: make this page
+    else:
+        review_form = ReviewForm()
+    return render(request, 'trainers/reviewform.html', {
+        'review_form': review_form,
+    })
